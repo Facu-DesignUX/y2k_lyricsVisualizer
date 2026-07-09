@@ -50,6 +50,7 @@ export function initControls() {
 
   const rowStrobeSpeed     = document.getElementById('row-strobe-speed');
   const rowStrobeFont      = document.getElementById('row-strobe-font');
+  const rowTypeSpeed       = document.getElementById('row-type-speed');
 
   const alignBtns      = [
     document.getElementById('btn-align-left'),
