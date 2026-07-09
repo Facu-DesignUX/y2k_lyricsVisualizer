@@ -1,0 +1,88 @@
+/* ---- Google Fonts ---- */
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+/* ---- CSS Variables ---- */
+:root {
+  --brat-green:    #8ace00;
+  --black:         #0a0a0a;
+  --white:         #f5f5f5;
+  --sidebar-bg:    #111111;
+  --sidebar-border:#222222;
+  --panel-section: #181818;
+  --text-muted:    #555555;
+  --text-main:     #cccccc;
+  --text-bright:   #eeeeee;
+  --accent:        #8ace00;
+  --accent-dim:    #5a8a00;
+  --red-strobe:    #cc0000;
+  --sidebar-w:     280px;
+  --radius:        6px;
+  --radius-sm:     4px;
+  --font-ui:       'Arial', system-ui, sans-serif;
+}
+
+/* ---- Reset ---- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--black);
+  color: var(--text-main);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+textarea {
+  resize: none;
+  font-family: inherit;
+}
+
+/* ---- App Layout ---- */
+#app {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* =============================================
+   RESPONSIVE (mobile fallback)
+   ============================================= */
+@media (max-width: 680px) {
+  #app {
+    flex-direction: column;
+    overflow-y: auto;
+    height: auto;
+  }
+
+  #sidebar {
+    width: 100%;
+    min-width: unset;
+    height: auto;
+    max-height: 50vh;
+    overflow-y: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--sidebar-border);
+  }
+
+  #canvas-area {
+    flex: none;
+    height: 50vw;
+    min-height: 260px;
+    padding: 12px;
+  }
+}

@@ -12,7 +12,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Oswald:wght@700&family=Black+Han+Sans&family=Barlow+Condensed:wght@900&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/themes.css" />
+  <link rel="stylesheet" href="css/visualizer.css" />
 </head>
 
 <body>
@@ -44,10 +46,6 @@
           <button class="style-btn" id="btn-deluxe" data-style="deluxe">
             <span class="style-preview deluxe-preview">brat</span>
             <span class="style-name">deluxe</span>
-          </button>
-          <button class="style-btn" id="btn-remix" data-style="remix">
-            <span class="style-preview remix-preview">ʇɐɹq</span>
-            <span class="style-name">remix</span>
           </button>
           <button class="style-btn" id="btn-moment" data-style="moment">
             <span class="style-preview moment-preview">NOW</span>
@@ -104,6 +102,20 @@
         </div>
 
         <div class="control-row">
+          <div class="control-header">
+            <span class="control-label">inverse text</span>
+            <button id="btn-inverse" class="toggle-btn" title="Mirror the text horizontally">mirror</button>
+          </div>
+        </div>
+
+        <div class="control-row" id="row-custom-bg">
+          <div class="control-header">
+            <span class="control-label">background</span>
+            <input type="color" id="ctrl-custom-bg" value="#8ace00" />
+          </div>
+        </div>
+
+        <div class="control-row">
           <span class="control-label">line height</span>
           <div class="slider-wrap">
             <input type="range" id="ctrl-lineheight" min="95" max="140" value="110" />
@@ -156,43 +168,56 @@
         </div>
 
         <!-- Strobe speed: only visible in "moment" mode -->
-        <div class="control-row" id="row-strobe-speed">
-          <span class="control-label">strobe speed</span>
+        <div class="control-row" id="row-strobe-speed" style="display: none;">
+          <span class="control-label">speed</span>
           <div class="slider-wrap">
             <input type="range" id="ctrl-strobe" min="1" max="30" value="10" />
             <span class="slider-val" id="val-strobe">10</span>
           </div>
         </div>
 
-        <!-- Strobe color palettes: only visible in "moment" mode -->
-        <div class="control-row" id="row-strobe-colors">
-          <span class="control-label">palette</span>
-          <div id="palette-grid">
-            <button class="palette-swatch active" id="pal-0" data-bg="#cc0000" data-fg="#6666ff" title="Red / Blue"
-              style="background: linear-gradient(135deg,#cc0000 50%,#6666ff 50%)"></button>
-            <button class="palette-swatch" id="pal-1" data-bg="#8ace00" data-fg="#000000" title="Brat / Black"
-              style="background: linear-gradient(135deg,#8ace00 50%,#000000 50%)"></button>
-            <button class="palette-swatch" id="pal-2" data-bg="#ff00aa" data-fg="#ffee00" title="Pink / Yellow"
-              style="background: linear-gradient(135deg,#ff00aa 50%,#ffee00 50%)"></button>
-            <button class="palette-swatch" id="pal-3" data-bg="#7700ff" data-fg="#00ffcc" title="Purple / Cyan"
-              style="background: linear-gradient(135deg,#7700ff 50%,#00ffcc 50%)"></button>
-            <button class="palette-swatch" id="pal-4" data-bg="#ff6600" data-fg="#001a66" title="Orange / Navy"
-              style="background: linear-gradient(135deg,#ff6600 50%,#001a66 50%)"></button>
-            <button class="palette-swatch" id="pal-5" data-bg="#ffffff" data-fg="#000000" title="White / Black"
-              style="background: linear-gradient(135deg,#ffffff 50%,#000000 50%)"></button>
-          </div>
-          <!-- Custom color pickers -->
-          <div class="color-pair" style="margin-top:6px">
-            <div class="color-item">
-              <label for="strobe-bg-color">bg</label>
-              <input type="color" id="strobe-bg-color" value="#cc0000" />
+        <!-- The Moment: Advanced Colors & Transitions -->
+        <details class="advanced-panel" id="panel-moment-fx" style="display: none;">
+          <summary class="advanced-summary">the moment fx</summary>
+          <div class="advanced-content">
+            
+            <div class="control-row">
+              <span class="control-label">text color</span>
+              <input type="color" id="moment-text-color" value="#6666ff" />
             </div>
-            <div class="color-item">
-              <label for="strobe-text-color">text</label>
-              <input type="color" id="strobe-text-color" value="#6666ff" />
+
+            <div class="control-row">
+              <div class="control-header">
+                <span class="control-label">background colors</span>
+                <button id="btn-add-color" class="toggle-btn" title="Add a background color (max 8)">+ add</button>
+              </div>
+              <div id="moment-bg-list" class="bg-color-list">
+                <!-- dynamic inputs will be injected here -->
+              </div>
             </div>
+
+            <div class="control-row">
+              <span class="control-label">transition mode</span>
+              <select id="ctrl-transition" class="modern-select">
+                <option value="strobe">strobe (cut)</option>
+                <option value="fade">fade (smooth)</option>
+                <option value="gradient">gradient (dynamic)</option>
+                <option value="static">static (no fx)</option>
+              </select>
+            </div>
+
+            <div class="control-row" id="row-gradient-type" style="display: none;">
+              <span class="control-label">gradient</span>
+              <select id="ctrl-gradient-type" class="modern-select">
+                <option value="circular">circular (spin)</option>
+                <option value="linear-v">vertical (down)</option>
+                <option value="linear-h">horizontal (right)</option>
+                <option value="radial-pulse">radial (pulse)</option>
+              </select>
+            </div>
+
           </div>
-        </div>
+        </details>
 
         <!-- Strobe font selector: only visible in "moment" mode -->
         <div class="control-row" id="row-strobe-font">
@@ -269,7 +294,7 @@
 
   </div>
 
-  <script src="app.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 
 </html>

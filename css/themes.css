@@ -1,0 +1,211 @@
+/* =============================================
+   STYLE SELECTOR GRID
+   ============================================= */
+#style-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.style-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 4px;
+  background: #1a1a1a;
+  border: 1.5px solid var(--sidebar-border);
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.style-btn:hover {
+  background: #222;
+  border-color: #444;
+}
+
+.style-btn.active {
+  border-color: var(--accent);
+  background: #1d2600;
+}
+
+.style-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 36px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  overflow: hidden;
+}
+
+.brat-preview {
+  background: var(--brat-green);
+  color: #000;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: -0.02em;
+}
+
+.deluxe-preview {
+  background: #fff;
+  color: #000;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+.remix-preview {
+  background: var(--brat-green);
+  color: #000;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  transform: scaleX(-1);
+  direction: rtl;
+}
+
+.moment-preview {
+  background: var(--red-strobe);
+  color: #6666ff;
+  font-family: 'Anton', 'Impact', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+}
+
+.style-name {
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  text-transform: lowercase;
+}
+
+.style-btn.active .style-name {
+  color: var(--accent);
+}
+
+/* =============================================
+   ADVANCED FX PANEL (the moment)
+   ============================================= */
+.advanced-panel {
+  background: #151515;
+  border: 1px solid var(--sidebar-border);
+  border-radius: var(--radius-sm);
+  margin-top: 4px;
+}
+
+.advanced-summary {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 8px 10px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  transition: color 0.2s, background 0.2s;
+}
+
+.advanced-summary:hover {
+  color: var(--text-main);
+  background: #1a1a1a;
+}
+
+.advanced-content {
+  padding: 10px;
+  border-top: 1px solid var(--sidebar-border);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bg-color-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.bg-color-item {
+  display: flex;
+  align-items: center;
+  background: #1a1a1a;
+  border: 1px solid var(--sidebar-border);
+  border-radius: 4px;
+  padding: 2px 2px 2px 6px;
+  gap: 4px;
+}
+
+.bg-color-item input[type="color"] {
+  border: none;
+  width: 20px;
+  height: 16px;
+  padding: 0;
+}
+
+.btn-remove-color {
+  color: #ff4444;
+  font-size: 14px;
+  padding: 0 4px;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.btn-remove-color:hover {
+  opacity: 1;
+}
+
+.modern-select {
+  width: 100%;
+  background: #1a1a1a;
+  border: 1px solid var(--sidebar-border);
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  font-size: 11px;
+  padding: 6px;
+  outline: none;
+  font-family: inherit;
+  text-transform: lowercase;
+}
+
+/* =============================================
+   FONT SELECTOR (the moment)
+   ============================================= */
+#font-grid {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.font-btn {
+  padding: 5px 8px;
+  background: #1a1a1a;
+  border: 1.5px solid var(--sidebar-border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.font-btn:hover {
+  border-color: #444;
+  color: var(--text-main);
+  background: #222;
+}
+
+.font-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: #1d2600;
+}
+
+/* hidden strobe-font row by default */
+#row-strobe-font {
+  display: none;
+}
