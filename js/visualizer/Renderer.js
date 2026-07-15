@@ -362,6 +362,18 @@ export function drawFrame(overrideText, overrideBg, overrideFg) {
     }
   }
 
+  // --- Force Frame for Constant Frame Rate Recording ---
+  // If the canvas is perfectly static, MediaRecorder drops frames causing variable framerate (VFR).
+  // VFR crashes the duration calculation in editors like Clipchamp. 
+  // We draw a tiny 1x1 alternating pixel to force true 30 FPS.
+  if (state.isRecording) {
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0); 
+    ctx.fillStyle = (performance.now() % 2 < 1) ? 'rgba(0,0,0,0.01)' : 'rgba(255,255,255,0.01)';
+    ctx.fillRect(cw - 1, ch - 1, 1, 1);
+    ctx.restore();
+  }
+
   ctx.restore();
   ctx.restore(); // Restore global inverse transform
 }

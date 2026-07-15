@@ -1,5 +1,5 @@
 import { state } from '../core/State.js';
-import { canvas } from '../visualizer/Renderer.js';
+import { canvas, drawFrame } from '../visualizer/Renderer.js';
 import { stopTypewriter } from '../visualizer/Animator.js';
 
 const btnRecord    = document.getElementById('btn-record');
@@ -48,8 +48,17 @@ export function startRecording() {
     URL.revokeObjectURL(url);
   };
 
-  mediaRecorder.start(100);
+  // Remove the 100ms timeslice to create a single unfragmented cluster (better for Clipchamp/Premiere)
+  mediaRecorder.start();
   state.isRecording = true;
+
+  // Force constant framerate by rendering in a loop
+  function forceRenderLoop() {
+    if (!state.isRecording) return;
+    drawFrame();
+    requestAnimationFrame(forceRenderLoop);
+  }
+  forceRenderLoop();
 
   recordInterval = setInterval(() => {
     recordSeconds++;
